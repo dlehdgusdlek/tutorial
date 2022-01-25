@@ -1,0 +1,49 @@
+{% comment %} <form action="/first/req/post/" method="post"> {% endcomment %}
+<form action="{% url 'firstapp:post'%}" method="post">
+    <input type="text" name="a"><br>
+    <input type="text" name="b"><br>
+    <input type="text" name="c"><br>
+    {% csrf_token %}
+    <button>Send</button>
+</form>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    const url = '{$ url "firstapp:post"$}'
+    const data = axios( {
+        url: 'http://ggoreb.com/dinosaur/info.jsp',
+        method : 'get',
+        params:{
+            {% comment %} search : '중원구' {% endcomment %}
+        }
+    } );
+    data.then(function(xyz) {
+        console.log(xyz.data)
+        let html = '<ol>';
+        for(let i = 0; i<xyz.data.length;i++){
+            let kind = xyz.data[i]['kind']
+            console.log(kind);
+            html+=`<li>${kind}</li>`
+        }
+        html+='</ol>';
+        document.body.innerHTML+=html;
+    }); 
+</script>
+
+
+
+{% comment %} <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    const data = axios({
+        url: '/first/req/get/',
+        method: 'get',
+        params: {
+            'a': 10, 'b': 20,
+            'c': 30
+        }
+    });
+    data.then(function (result) {
+        console.log(result.data);   
+    });
+</script> {% endcomment %}
